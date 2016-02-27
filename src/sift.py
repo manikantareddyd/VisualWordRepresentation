@@ -6,7 +6,8 @@ class SIFT:
     def __init__(self):
         self.FeatureVectors = []
         self.imgfiles   = listdir('data')
-        self.imageFeat = []
+        self.imageFeat = {}
+        self.imageName  = []
         self.extract()
     def extract(self):
         for imgfile in self.imgfiles:
@@ -14,6 +15,7 @@ class SIFT:
             img = cv2.imread('data/'+imgfile)
             gray= cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
             kp,des = sift.detectAndCompute(gray,None)
-            self.imageFeat.append([imgfile,kp,des])
+            self.imageFeat[imgfile]=[kp,des]
             for j in des:
                 self.FeatureVectors.append(j)
+                self.imageName.append(imgfile)
