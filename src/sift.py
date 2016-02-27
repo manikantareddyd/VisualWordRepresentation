@@ -1,6 +1,6 @@
 import cv2
 from os import listdir
-
+import numpy as np
 class SIFT:
 
     def __init__(self):
@@ -15,7 +15,7 @@ class SIFT:
             img = cv2.imread('data/'+imgfile)
             gray= cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
             kp,des = sift.detectAndCompute(gray,None)
-            self.imageFeat[imgfile]=[kp,des]
+            self.imageFeat[str(imgfile)] = np.array(des)
             for j in des:
                 self.FeatureVectors.append(j)
                 self.imageName.append(imgfile)

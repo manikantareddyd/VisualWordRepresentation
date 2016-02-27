@@ -12,15 +12,16 @@ class VocabTree:
         self.nodeImages = {}
         self.leafLabels=[]
         root = (np.array(siftDescriptor.FeatureVectors)).mean(axis=0)
-        self.treeMap = {'0':root} #Stores a map from node number to FeatureVector(Centroid)
+        self.treeMap = {0:root} #Stores a map from node number to FeatureVector(Centroid)
         self.treeGenerator(0,siftDescriptor.FeatureVectors,siftDescriptor.imageName)
 
-    def treeGenerator(self, rootLabel, points, names):
+    def treeGenerator(self, rootLabel, points,names):
         # rootLabel is label of root
         # points is list of Feature Vectors
         # names is the name of the image corresponding Feature vector is in
         print rootLabel, len(points)
         if len(points) < self.threshold:
+            self.adjancency[rootLabel]=[]
             if rootLabel not in self.leafLabels:
                 self.leafLabels.append(rootLabel)
             return
@@ -43,7 +44,7 @@ class VocabTree:
                 localClusterPoints[localModel.labels_[i]].append(points[i])
                 localClusterImgNames[localModel.labels_[i]].append(names[i])
                 if names[i] not in self.nodeImages[localTree[tuple(localModel.cluster_centers_[localModel.labels_[i]])]]:
-                    self.nodeImages[localTree[tuple(localModel.cluster_centers_[localModel.labels_[i]])]].append(names[i])
+                     self.nodeImages[localTree[tuple(localModel.cluster_centers_[localModel.labels_[i]])]].append(names[i])
             for i in range(self.branches):
                 thisClusterCenter = tuple(localModel.cluster_centers_[i])
                 self.treeGenerator(localTree[thisClusterCenter],localClusterPoints[i],localClusterImgNames[i])
