@@ -2,19 +2,18 @@ from tree import *
 import math
 import re
 class result:
-    def __init__(self,branches,depth):
-        self.siftDescriptor = SIFT()
+    def __init__(self,s,branches,depth):
+        self.siftDescriptor = s
         self.branches=branches
         self.depth=depth
         l=len(self.siftDescriptor.FeatureVectors)
         self.threshold = int(branches**(int(math.log(l,branches))+1)/branches**(depth-1))
-        print "Number of Branches:",self.branches
-        print "Depth:",self.depth
-        print "Threshold:",self.threshold
+        # print "Number of Branches:",self.branches
+        # print "Depth:",self.depth
+        # print "Threshold:",self.threshold
         self.vocabTree = VocabTree(self.siftDescriptor,self.branches,self.threshold)
         self.imageDescriptors={}
         self.imageFrequency  ={}
-        print 'Hi'
         self.descriptorWeights={}
         for i in self.vocabTree.leafLabels:
             self.descriptorWeights[i]=math.log1p(len(self.siftDescriptor.imgfiles)/float(len(self.vocabTree.nodeImages[i])))
@@ -108,4 +107,3 @@ class result:
             su+=self.allScores[i][0]
             s+=self.allScores[i][1]
         return su/(4.0*l),np.ndarray.tolist(s/(1.0*l))
-print "lolfgchjbk"

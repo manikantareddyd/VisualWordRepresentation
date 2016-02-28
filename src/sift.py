@@ -8,14 +8,18 @@ class SIFT:
         self.imgfiles   = listdir('data')
         self.imageFeat = {}
         self.imageName  = []
-        self.extract()
-    def extract(self):
+        self.extractAll()
+    def extractAll(self):
         for imgfile in self.imgfiles:
-            sift = cv2.xfeatures2d.SIFT_create()
-            img = cv2.imread('data/'+imgfile)
-            gray= cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-            kp,des = sift.detectAndCompute(gray,None)
-            self.imageFeat[str(imgfile)] = np.array(des)
-            for j in des:
-                self.FeatureVectors.append(j)
-                self.imageName.append(imgfile)
+            self.extract(imgfile)
+        return
+    def extract(self,imgfile):
+        sift = cv2.xfeatures2d.SIFT_create()
+        img = cv2.imread('data/'+imgfile)
+        gray= cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+        kp,des = sift.detectAndCompute(gray,None)
+        self.imageFeat[str(imgfile)] = np.array(des)
+        for j in des:
+            self.FeatureVectors.append(j)
+            self.imageName.append(imgfile)
+        return

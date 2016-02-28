@@ -19,7 +19,7 @@ class VocabTree:
         # rootLabel is label of root
         # points is list of Feature Vectors
         # names is the name of the image corresponding Feature vector is in
-        print rootLabel, len(points)
+        # print rootLabel, len(points)
         if len(points) < self.threshold:
             self.adjancency[rootLabel]=[]
             if rootLabel not in self.leafLabels:
