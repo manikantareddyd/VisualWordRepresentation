@@ -26,7 +26,7 @@ class VocabTree:
                 self.leafLabels.append(rootLabel)
             return
         else:
-            localModel = KMeans(n_clusters = self.branches,n_jobs=3)
+            localModel = KMeans(n_clusters = self.branches,n_jobs=4)
             localModel.fit(points)
             adj = []
             localTree = {}

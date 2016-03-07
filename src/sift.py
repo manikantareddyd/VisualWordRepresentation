@@ -3,9 +3,9 @@ from os import listdir
 import numpy as np
 class SIFT:
 
-    def __init__(self,n):
+    def __init__(self,s,e):
         self.FeatureVectors = []
-        self.imgfiles   = sorted(listdir('../ukbench/full'))[:n]
+        self.imgfiles   = sorted(listdir('../ukbench/full'))[s:e]
         self.imageFeat = {}
         self.imageName  = []
         self.extractAll()

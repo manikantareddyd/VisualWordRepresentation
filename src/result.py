@@ -18,8 +18,8 @@ class result:
         for i in self.vocabTree.leafLabels:
             self.descriptorWeights[i]=math.log1p(len(self.siftDescriptor.imgfiles)/float(len(self.vocabTree.nodeImages[i])))
         self.allMatches={}
-        self.getAllMatches()
         self.allScores={}
+        self.getAllMatches()
         self.getAllScores()
         self.finalResult=self.getFinalScore()
 
